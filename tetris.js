@@ -8,6 +8,20 @@ const matrix = [
     [0, 1, 0],
 ]
 
+function collide(arena, player) {
+    const {matrix, pos} = player;
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < matrix[y].length; ++x) {
+            console.log("Checking");
+            if (matrix[y][x] !== 0 && (arena[y + pos.y] && arena[y + pos.y][x + pos.x]) !== 0) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 function createMatrix(width, height) {
     const matrix = [];
     while(height--) {
@@ -40,8 +54,23 @@ const player = {
     matrix: matrix
 }
 
+function merge(arena, player) {
+    player.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                arena[y + player.pos.y][x + player.pos.x] = value;
+            }
+        });
+    });
+}
+
 function playerDrop() {
     player.pos.y++;
+    if (collide(arena, player)) {
+        player.pos.y--;
+        merge(arena, player);
+        player.pos.y = 0;
+    }
     dropCounter = 0;
 }
 
