@@ -75,4 +75,11 @@ export default class Player {
             matrix.reverse();
         }
     }
+
+    update(deltaTime) {
+        this.dropCounter += deltaTime;
+        if (this.dropCounter > dropInterval) {
+            this.drop();
+        }
+    }
 }
