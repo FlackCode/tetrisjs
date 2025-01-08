@@ -1,3 +1,5 @@
+import { createPiece } from "./utils.js";
+
 export default class Player {
     constructor(tetris) {
         this.DROP_SLOW = 1000;
@@ -27,11 +29,11 @@ export default class Player {
         const pieces = "ILJOTSZ";
         this.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
         this.pos.y = 0;
-        this.pos.x = (this.arena[0].length / 2 | 0) - (this.matrix[0].length / 2 | 0);
+        this.pos.x = (this.arena.matrix[0].length / 2 | 0) - (this.matrix[0].length / 2 | 0);
         if (this.arena.collide(this)) {
             this.arena.clear();
             this.score = 0;
-            updateScore();
+            this.tetris.updateScore(this.score);
         }
     }
 
@@ -55,7 +57,7 @@ export default class Player {
             this.pos.x += offset;
             offset = -(offset + (offset > 0 ? 1 : -1));
             if (offset > this.matrix[0].length) {
-                rotateMatrix(this.matrix, -dir);
+                this.rotateMatrix(this.matrix, -dir);
                 this.pos.x = pos;
                 return;
             }
@@ -78,7 +80,7 @@ export default class Player {
 
     update(deltaTime) {
         this.dropCounter += deltaTime;
-        if (this.dropCounter > dropInterval) {
+        if (this.dropCounter > this.dropInterval) {
             this.drop();
         }
     }

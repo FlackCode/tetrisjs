@@ -1,5 +1,5 @@
-import Arena from "./Arena";
-import Player from "./Player";
+import Arena from "./Arena.js";
+import Player from "./Player.js";
 
 export default class Tetris {
     constructor(element) {
@@ -40,7 +40,7 @@ export default class Tetris {
         this.context.fillStyle = "#000";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.drawMatrix(this.arena, {x: 0, y: 0});
+        this.drawMatrix(this.arena.matrix, {x: 0, y: 0});
         this.drawMatrix(this.player.matrix, this.player.pos);
     }
 

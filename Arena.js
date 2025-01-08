@@ -15,7 +15,7 @@ export default class Arena {
         player.matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
-                    this[y + player.pos.y][x + player.pos.x] = value;
+                    this.matrix[y + player.pos.y][x + player.pos.x] = value;
                 }
             });
         });

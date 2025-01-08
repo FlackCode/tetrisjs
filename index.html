@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris</title>
-    <script src="tetris.js" defer></script>
+    
     <style>
         body {
             background: #202028;
@@ -12,17 +12,42 @@
             font-family: sans-serif;
             font-size: 2em;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .player {
+            margin: 0 20px;
+        }
+
         canvas {
             height: 90vh;
-            display: block;
-            margin: auto;
             image-rendering: pixelated;
         }
     </style>
 </head>
 <body>
-    <div id="score"></div>
-    <canvas id="tetris" width="240" height="400"></canvas>
+    <div class="container">
+        <div class="player">
+            <div class="score"></div>
+            <canvas class="tetris" width="240" height="400"></canvas>
+        </div>
+
+        <div class="player">
+            <div class="score"></div>
+            <canvas class="tetris" width="240" height="400"></canvas>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
 </body>
 </html>
